@@ -37,3 +37,25 @@ En lugar de mostrar el valor de cada radio button cuando se le hace click, que e
 
 * A detectar eventos en el navegador (los clicks de la usuaria) .
 * Identificar los elementos HTML que hay en el navegador y obtener sus valores/estados.
+
+# Hito 2
+
+Agrega una pantalla simple de bienvenida con los siguientes elementos y características:
+
+* Una caja de texto (input text) en la que escribe su nombre quien juega.
+* Un botón de "jugar" o "comenzar" para ir a las preguntas.
+* Esta vez deberán haber al menos 3 preguntas con sus respectivas alternativas de respuesta.
+* Antes de las peguntas debe decir "Hola [el nombre que se escribió en la pantalla de bienvenida]"
+* El botón para responder muestra la alternativa correcta para cada pregunta y, además, muestra si cada una de las respuestas fue correcta o incorrecta.
+* Un botón para volver a jugar que vuelve a la pantalla inicial en la que se pide el nombre.
+
+## Sugerencia de micro-proyecto: Prueba evaluar las respuestas de tu usuaria
+
+Para determinar si las respuestas seleccionadas son correctas o incorrectas, necesitas predefinir cuál alternativa es la correcta para cada pregunta y evaluar (comparar) si la respuesta de tu usuaria coincide o no.
+
+Pista: Lee sobre condicionales y control de flujo (if, else, else if).
+
+### Aprenderás:
+
+* A identificar los elementos HTML que hay en el navegador y obtener sus valores/estados.
+* Comparar los valores/estados de los elementos y hacer algo según el resultado que obtengas de la comparación/evaluación.
