@@ -14,8 +14,13 @@ function App() {
     setPlayerName(name);
   };
 
+  const handleReturn = () => {
+    setGameStarted(false);
+    setPlayerName('');
+  };
+
   if (gameStarted) {
-    return <Questions playerName={playerName} questions={questions} />;
+    return <Questions playerName={playerName} questions={questions} onReturn={handleReturn}/>;
   }
 
   return (

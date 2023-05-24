@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Questions({ playerName, questions }){
+function Questions({ playerName, questions, onReturn }){
     const [selectedAnswers, setSelectedAnswers] = useState({});
     const [showResult, setShowResult] = useState(false);
 
@@ -21,8 +21,6 @@ function Questions({ playerName, questions }){
         questions.forEach((question) => {
           if (selectedAnswers[question.id] === question.correctAnswer) {
             score++;
-          }else{
-            score--;
           }
         });
     
@@ -71,6 +69,8 @@ function Questions({ playerName, questions }){
                 </div>
             )
         }
+
+        <button onClick={onReturn}>Volver a Jugar</button>
         </React.Fragment>
     );
 }
