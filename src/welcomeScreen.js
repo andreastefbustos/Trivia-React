@@ -10,6 +10,8 @@ function WelcomeScreen({ onStart }){
     const handlePlayClick = () => {
         if (name.trim() !== '') {
           onStart(name);
+        }else {
+            alert("Es necesario ingresar un nombre de usuario");
         }
     };
     

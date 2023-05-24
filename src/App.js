@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { questions } from './questionsData';
 import { WelcomeScreen } from './welcomeScreen';
 import { Questions } from './Questions.js'
 import './App.css';
@@ -14,9 +15,9 @@ function App() {
   };
 
   if (gameStarted) {
-    return <Questions playerName={playerName} />;
+    return <Questions playerName={playerName} questions={questions} />;
   }
-  
+
   return (
       <React.Fragment>
         

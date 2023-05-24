@@ -1,95 +1,76 @@
 import React, { useState } from "react";
 
-function Questions({ playerName }){
-    const [question1, setQuestion1] = useState('');
-    const [question2, setQuestion2] = useState('');
+function Questions({ playerName, questions }){
+    const [selectedAnswers, setSelectedAnswers] = useState({});
+    const [showResult, setShowResult] = useState(false);
 
-    const handleQuestion1Change = (event) => {
-        setQuestion1(event.target.value);
+    const handleOptionChange = (questionId, option) => {
+        setSelectedAnswers((prevSelectedAnswers) => ({
+          ...prevSelectedAnswers,
+          [questionId]: option,
+        }));
     };
 
-    const handleQuestion2Change = (event) => {
-        setQuestion2(event.target.value);
+    const handleResultClick = () => {
+        setShowResult(true);
     };
 
-    const onClickAnswer = () => {
-        const message = `Question 1: ${question1} y Question 2: ${question2}`;
-        alert(message);
+    const calculateScore = () => {
+        let score = 0;
+    
+        questions.forEach((question) => {
+          if (selectedAnswers[question.id] === question.correctAnswer) {
+            score++;
+          }else{
+            score--;
+          }
+        });
+    
+        return score;
     };
     
     return (
         <React.Fragment>
         <h1>Hola, {playerName}</h1>
-        <h3>1. Cuál es la Flor Nacional de Venezuela?</h3>
-        <label>
-          <input 
-            type="radio"  
-            value="option1"
-            checked={question1 === "option1"}
-            onChange={handleQuestion1Change} 
-          />
-          Orquídea
-        </label>
-        <label>
-          <input 
-            type="radio"  
-            value="option2"
-            checked={question1 === "option2"}
-            onChange={handleQuestion1Change} 
-          />
-          Girasol
-        </label>
-        <label>
-          <input 
-            type="radio" 
-            value="option3"
-            checked={question1 === "option3"}
-            onChange={handleQuestion1Change}
-          />
-          Hortensia
-        </label>
+        <h2>Preguntas:</h2>
+        {questions.map((question) => (
+            <div key={question.id}>
+                <h3>{question.question}</h3>
+                <div>
+                    {question.options.map((option) => (
+                        <label key={option}>
+                            <input
+                                type="radio"
+                                value={option}
+                                checked={selectedAnswers[question.id] === option}
+                                onChange={() => handleOptionChange(question.id, option)}
+                            />
+                            {option}
+                        </label>
+                    ))}
+                </div>
+            </div>
+        ))}
 
-        <h3>2. Cuál es el clima que más predomina en México?</h3>
-        <label>
-          <input 
-            type="radio"  
-            value="option1"
-            checked={question2 === "option1"}
-            onChange={handleQuestion2Change} 
-          />
-          Templado
-        </label>
-        <label>
-          <input 
-            type="radio"  
-            value="option2"
-            checked={question2 === "option2"}
-            onChange={handleQuestion2Change} 
-          />
-          Templado-Sub-húmedo
-        </label>
-        <label>
-          <input 
-            type="radio"
-            value="option3"
-            checked={question2 === "option3"}
-            onChange={handleQuestion2Change}
-          />
-          Sub-húmedo
-        </label>
-
-        {/* <h3>3. Cúal es la ciudad originaria de los Beatles?</h3>
-        <label>
-          <input type="radio" name="answer3" value="a" />Bristol, United Kingdom
-        </label>
-        <label>
-          <input type="radio" name="answer3" value="b" />Londres, United Kingdom
-        </label>
-        <label>
-          <input type="radio" name="answer3" value="c" />Liverpool, United Kingdom
-        </label> */}
-
-        <button onClick={onClickAnswer}>Responder y Ver Resultados</button>
+        <button onClick={handleResultClick}>Responder y Ver Resultados</button>
+        {
+            showResult && (
+                <div>
+                    <h2>Resultado:</h2>
+                    {questions.map((question) => (
+                        <div key={question.id}>
+                            <p>
+                                <strong>{question.question}</strong>
+                            </p>
+                            {selectedAnswers[question.id] === question.correctAnswer ? 
+                                (<p>Respuesta Correcta</p>) : (<p>Respuesta incorrecta, la respuesta correcta es: {question.correctAnswer}</p>)
+                            }
+                        </div>
+                    ))}
+                    <p>Puntaje Total: {calculateScore()}</p>
+                </div>
+            )
+        }
         </React.Fragment>
     );
 }
