@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { questions } from './questionsData';
-import { WelcomeScreen } from './welcomeScreen';
-import { Questions } from './Questions.js'
-import './App.css';
+import { questions } from '../Questions/questionsData';
+import { WelcomeScreen } from '../MainScreen/welcomeScreen';
+import { Questions } from '../Questions/Questions.js'
 
 
 function App() {
