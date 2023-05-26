@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { questions } from '../Questions/questionsData';
 import { WelcomeScreen } from '../MainScreen/welcomeScreen';
-import { Questions } from '../Questions/Questions.js'
+import { QuestionTypeSelection } from '../Questions/QuestionTypeSelection';
+import { QuestionsView } from '../Questions/QuestionsView.js'
 
 
 function App() {
   const [gameStarted, setGameStarted] = useState(false);
   const [playerName, setPlayerName] = useState('');
+  const [questionType, setQuestionType] = useState('');
 
   const handleStart = (name) => {
     setGameStarted(true);
@@ -16,19 +17,20 @@ function App() {
   const handleReturn = () => {
     setGameStarted(false);
     setPlayerName('');
+    setQuestionType(''); // Restablecer el estado de questionType a una cadena vacía
   };
 
-  if (gameStarted) {
-    return <Questions playerName={playerName} questions={questions} onReturn={handleReturn}/>;
-  }
+  const handleTypeSelect = (type) => {
+    setQuestionType(type);
+  };
 
-  return (
-      <React.Fragment>
-        
-          <WelcomeScreen onStart={handleStart} />
-    
-      </React.Fragment>
-  );
+  if (!gameStarted) {
+    return <WelcomeScreen onStart={handleStart} />;
+  } else if (!questionType) {
+    return <QuestionTypeSelection onSelectType={handleTypeSelect} />;
+  } else {
+    return <QuestionsView playerName={playerName} questionType={questionType} onReturn={handleReturn}/>;
+  }
 }
 
 export default App;

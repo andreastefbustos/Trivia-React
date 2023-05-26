@@ -59,3 +59,8 @@ Pista: Lee sobre condicionales y control de flujo (if, else, else if).
 
 * A identificar los elementos HTML que hay en el navegador y obtener sus valores/estados.
 * Comparar los valores/estados de los elementos y hacer algo según el resultado que obtengas de la comparación/evaluación.
+
+# Hito 3
+
+* Permítele a la usuaria elegir entre 2 tipos de preguntas después de escribir su nombre y antes de ir a responder. Por ejemplo, unas sobre comida y otras sobre cervezas.
+* Agrega un puntaje a respuestas correctas e incorrectas y muestra un puntaje total al final.

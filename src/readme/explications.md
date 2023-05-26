@@ -24,6 +24,18 @@ La función handleStart es necesaria para manejar el evento de inicio del juego 
 
 En resumen, la función `handleStart` se encarga de actualizar los estados `gameStarted` y `playerName` en el componente `App`. Al llamar a esta función, se establece `gameStarted` en `true`, lo que indica que el juego ha comenzado, y se guarda el nombre ingresado por el jugador en el estado `playerName`. Estas actualizaciones de estado permiten controlar el flujo del juego y utilizar el nombre del jugador en otras partes del componente o en otros componentes relacionados.
 
+## handleReturn
+
+El problema que se estaba presentando en la funcion al momento de regresar a la pagina principal era la siguiente: 
+
+El problema se debe al hecho de que el estado de la variable questionType no se restablece a su valor inicial cuando el usuario hace clic en el botón "Volver a Jugar". Esto provoca que el componente QuestionsView se renderice directamente en lugar del componente QuestionTypeSelection.
+
+Para solucionar este problema, puedes añadir una línea de código en la función handleReturn del componente App para restablecer el estado de questionType a una cadena vacía (''), de modo que cuando el usuario vuelva a jugar, se muestre nuevamente la selección del tipo de pregunta.
+
+Al agregar setQuestionType('') en la función handleReturn, se asegura de que el estado de questionType se restablezca a una cadena vacía cuando el usuario hace clic en el botón "Volver a Jugar". Luego, cuando el usuario ingrese un nombre nuevamente, se mostrará la selección del tipo de pregunta en lugar de ir directamente a las preguntas.
+
+Con esta actualización, el flujo de la aplicación debería funcionar correctamente y mostrar la selección del tipo de pregunta después de hacer clic en el botón "Volver a Jugar".
+
 # Condición if (gameStarted)
 
 La condición if (gameStarted) y la instrucción return `<Questions playerName={playerName} />`; en el componente App se utilizan para controlar el flujo de la aplicación y mostrar el componente Questions cuando el juego ha comenzado.
@@ -37,3 +49,16 @@ Aquí está cómo funciona:
 3. Cuando la condición if (gameStarted) se cumple, se ejecuta la instrucción return `<Questions playerName={playerName} />`;. Esto devuelve el componente Questions y pasa el nombre del jugador (playerName) como una prop llamada playerName. De esta manera, el componente Questions puede acceder al nombre del jugador y utilizarlo según sea necesario.
 
 En resumen, cuando gameStarted es true, el componente App renderiza el componente Questions, pasando el nombre del jugador como prop. Esto permite que el componente Questions muestre las preguntas y utilice el nombre del jugador en su lógica interna.
+
+# Componente Question
+
+En este código, se utilizó el parámetro `index` en la función map para generar una clave única para cada opción. Además, se hizo uso de la propiedad value del input para asignar directamente la opción como valor. Esto asegura que la opción seleccionada se refleje correctamente en el estado y se muestre como seleccionada en el componente.
+
+Es decir, e utiliza el parámetro index dentro de la función map para generar una clave única para cada opción en el array de opciones.
+
+Cuando se utiliza el método map en un array, este proporciona un segundo parámetro opcional que es el índice de la iteración actual. El índice comienza en 0 para el primer elemento del array y aumenta en 1 para cada elemento subsiguiente.
+
+En lugar de utilizar el id de la opción como clave (como se hacía anteriormente), en este caso se utiliza el índice proporcionado por map como la clave. Esto es seguro de hacer siempre y cuando las opciones del array sean estáticas y no cambien de posición o se modifiquen dinámicamente.
+
+Al utilizar el índice como clave, se asegura que cada opción tenga una clave única, ya que los índices serán diferentes para cada opción en el array. Esto evita la advertencia de React sobre la falta de una clave única.
+
